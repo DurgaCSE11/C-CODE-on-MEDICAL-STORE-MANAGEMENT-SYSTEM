@@ -35,8 +35,6 @@ void ensureHeader(FILE *fp, const char* filename, const char* header);
 // ======== FILENAMES & DIRECTORIES ========
 const char *MEDICINE_FILE = "medicine_data.csv";
 const char *SALES_FILE = "sales_records.csv";
-// IMPORTANT: Note the double backslashes (\\)
-// This is required for C strings
 const char *BILL_DIRECTORY = "E:\\0. VSSUT ACADEMICS\\1ST YEAR\\1ST SEM PROJECTS\\CDS\\BILLS";
 
 
@@ -279,8 +277,8 @@ void deleteMedicine() {
     fclose(fp); fclose(temp);
     remove(MEDICINE_FILE);
     rename("temp.csv", MEDICINE_FILE);
-    if (found) printf("\n✅ Medicine (ID: %d) deleted successfully!\n", deleteID);
-    else printf("\n❌ Medicine ID not found!\n");
+    if (found) printf("\n Medicine (ID: %d) deleted successfully!\n", deleteID);
+    else printf("\n Medicine ID not found!\n");
 }
 
 // ======== SALES & BILLING FUNCTIONS ========
@@ -405,7 +403,7 @@ void sellMedicine() {
     rename("temp.csv", MEDICINE_FILE);
 
     if (!found) printf("\n Medicine ID not found! Sale cancelled.\n");
-    else if (found && stockOK && saleMade) printf("\n✅ Sale successful! Inventory updated.\n");
+    else if (found && stockOK && saleMade) printf("\n Sale successful! Inventory updated.\n");
     else printf("\n Sale cancelled.\n");
 }
 
@@ -502,12 +500,10 @@ void printSavedBill() {
         return;
     }
     fclose(fp); // Just checking for existence, so close it.
-
     // 5. Construct and execute the print command
     // "notepad /p [filename]" is the Windows command to print a text file
     // We add quotes ( \" ) around the path to handle any spaces.
     sprintf(printCommand, "notepad /p \"%s\"", fullPath);
-    
     printf("\nSending %s to default printer...\n", filename);
     system(printCommand);
 }
